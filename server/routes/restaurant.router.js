@@ -14,7 +14,7 @@ router.get('/', (req, res) => {// get info from server
         });
 });//end app.get
 
-router.post('/', (req, res) => {// get info from server
+router.post('/', (req, res) => {// get 
     pool.query(`INSERT INTO "restaurant" ("name", "type")
                 VALUES($1, $2);`,
         [req.body.name, req.body.type])//relation error is table in teminal, use back ticks
@@ -22,6 +22,19 @@ router.post('/', (req, res) => {// get info from server
             res.sendStatus(201);
         }).catch((error) => {
             console.log('error with restaurant select POST insert Query', error);
+            res.sendStatus(500);
+        });
+});// end app.post
+
+router.delete('/:id', (req, res) => {// : means anything :taco
+    console.log('restaurant DELETE HIT');
+    console.log('req.params',req.params);
+
+    pool.query(`DELETE FROM "restaurant" WHERE "id"=$1;`,[req.params.id])//relation error is table in teminal, use back ticks
+        .then(() => {
+            res.sendStatus(204);//for delete 204
+        }).catch((error) => {
+            console.log('error with restaurant select DELETE Query', error);
             res.sendStatus(500);
         });
 });// end app.post

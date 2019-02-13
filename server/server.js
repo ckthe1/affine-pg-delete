@@ -6,9 +6,6 @@ let app = express();
 app.use(express.static('server/public'));// get any request, static
 app.use(bodyParser.urlencoded({ extended: true }));//is req.body
 
-
-
-
 const restaurantRouter = require('./routes/restaurant.router');
 
 app.use('/restaurant', restaurantRouter);
