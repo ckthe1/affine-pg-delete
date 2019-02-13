@@ -16,7 +16,7 @@ function addRestaurant(){
         url: '/restaurant',
         method: 'POST',
         data: { 
-            name:name,
+            name: name,
             type: type,    
         }
     }).then(function (response) {
@@ -31,13 +31,14 @@ function addRestaurant(){
          url: '/restaurant',
          method: 'GET'//reqst to server           
      }).then(function (response) {
-         $('#ulOutput').empty();
+         $('#restoList').empty();
          response.forEach(function (restaurant) {
-             $('#ulOutput').append(`
-                <li id="liOutput">
-                    Name: ${restaurant.name}
-                    Type: ${restaurant.type}                           
-                </li>
+             console.log('in loop GET getResto');
+             $('#restoList').append(`              
+                    <tr id="rOutput">
+                        <td>Name: ${restaurant.name}</td>
+                        <td>Type: ${restaurant.type} </td>                       
+                    </tr>
                 `)
          })//end loop
      })//end .then
