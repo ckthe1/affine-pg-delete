@@ -34,7 +34,17 @@ app.get('/restaurant', (req, res) => {// get info from server
         });
 });//end app.get
 
-
+app.post('/restaurant', (req, res) => {// get info from server
+    pool.query(`INSERT INTO "restaurant" ("name", "type")
+                VALUES($1, $2);`,
+        [req.body.name, req.body.type])//relation error is table in teminal, use back ticks
+        .then(() => {
+            res.sendStatus(201);
+        }).catch((error) => {
+            console.log('error with restaurant select POST', error);
+            res.sendStatus(500);
+        });
+});// end app.post
 
 
 app.listen(PORT, () => {

@@ -3,9 +3,11 @@ $(document).ready(onReady);
 function onReady(){
     console.log('in Jquery');
     $('#submitButton').on('click', addRestaurant);
-    addRestaurant();
+    getResto();
 
 }; //end onReady
+
+
 function addRestaurant(){
     let name = $('#nameIn').val();
     let type = $('#typeIn').val();
@@ -15,18 +17,15 @@ function addRestaurant(){
         method: 'POST',
         data: { 
             name:name,
-            type: type,
-            
+            type: type,    
         }
     }).then(function (response) {
         console.log(response);
-
-        getResto();
+          getResto();
     });
-}
-
-
 };//end addRestaurant
+
+
  function getResto(){
      $.ajax({ // ajax go to server
          url: '/restaurant',
@@ -37,11 +36,9 @@ function addRestaurant(){
              $('#ulOutput').append(`
                 <li id="liOutput">
                     Name: ${restaurant.name}
-                    Type: ${restaurant.type}
-                                     
+                    Type: ${restaurant.type}                           
                 </li>
                 `)
          })//end loop
-
      })//end .then
  }
